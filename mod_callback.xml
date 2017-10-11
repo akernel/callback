@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5.0" client="site" method="upgrade">
+	<name>MOD_CALLBACK</name>
+	<creationDate>25.04.2017</creationDate>
+	<author>A.Kernel</author>
+	<authorEmail>info@akernel.ru</authorEmail>
+	<authorUrl>www.akernel.ru</authorUrl>
+	<copyright>(C) 2013 A.Kernel</copyright>
+	<license>http://www.akernel.ru/license/callback.html</license>
+	<version>3.3.0</version>
+	<description>MOD_CALLBACK_DESC</description>
+    
+	<languages folder="language">
+		<language tag="en-GB">en-GB.mod_callback.ini</language>
+		<language tag="en-GB">en-GB.mod_callback.sys.ini</language>
+		<language tag="ru-RU">ru-RU.mod_callback.ini</language>
+		<language tag="ru-RU">ru-RU.mod_callback.sys.ini</language>
+	</languages>
+    
+	<files>
+		<filename module="mod_callback">mod_callback.php</filename>
+		<filename>helper.php</filename>
+        <filename>index.html</filename>
+        <folder>fields</folder>
+        <folder>forms</folder>
+        <folder>libs</folder>
+        <folder>tmpl</folder>
+	</files>
+    
+    <media destination="mod_callback" folder="media">
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+        <filename>index.html</filename>
+	</media>
+    
+    <config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/modules/mod_callback/fields/">
+                <field name="tmpl" type="template" default="default" label="MOD_CALLBACK_TMPL_LABEL" />
+                <field
+                    name="mod_type"
+                    type="radio" class="btn-group"
+                    label="MOD_CALLBACK_MOD_TYPE_LABEL"
+                    description="MOD_CALLBACK_MOD_TYPE_DESC"
+                    default="popup"
+                >
+                    <option value="popup">MOD_CALLBACK_MOD_TYPE_POPUP</option>
+					<option value="content">MOD_CALLBACK_MOD_TYPE_CONTENT</option>
+				</field>
+                <field name="use_jquery" class="btn-group btn-group-yesno" type="radio" default="1" label="MOD_CALLBACK_JQUERY_LABEL" description="MOD_CALLBACK_JQUERY_DESC">
+					<option value="0">MOD_CALLBACK_NO</option>
+					<option value="1">MOD_CALLBACK_YES</option>
+				</field>
+                <field name="button_type" type="list" default="1" label="MOD_CALLBACK_BUTTON_TYPE_LABEL" description="MOD_CALLBACK_BUTTON_TYPE_DESC" showon="mod_type:popup">
+					<option value="1">MOD_CALLBACK_BUTTON_TYPE_TEXT</option>
+					<option value="2">MOD_CALLBACK_BUTTON_TYPE_BUTTON</option>
+					<option value="3">MOD_CALLBACK_BUTTON_TYPE_AUTO_BUTTON</option>
+					<option value="0">MOD_CALLBACK_BUTTON_TYPE_HIDDEN</option>
+				</field>
+				<field name="button_text" type="text" default="Обратный звонок" label="MOD_CALLBACK_BUTTON_TEXT_LABEL" showon="mod_type:popup[AND]button_type:1,2,3" />
+                <field name="button_sfc_class" type="text" default="" label="MOD_CALLBACK_BUTTON_SFC_CLASS_LABEL" showon="mod_type:popup[AND]button_type:1,2,3" />
+                <field name="button_position" class="btn-group" type="radio" default="1" label="MOD_CALLBACK_BUTTON_POSITION_LABEL" description="MOD_CALLBACK_BUTTON_POSITION_DESC" showon="mod_type:popup[AND]button_type:3">
+					<option value="1">MOD_CALLBACK_BUTTON_POSITION_RIGHT</option>
+					<option value="2">MOD_CALLBACK_BUTTON_POSITION_LEFT</option>
+				</field>
+                
+                
+                <field name="bd_button" type="color" default=""
+                    	label="MOD_CALLBACK_BUTTON_BD_COLOR_LABEL" showon="mod_type:popup[AND]button_type:1,2,3" />
+                <field name="bg_button" type="color" default=""
+                    	label="MOD_CALLBACK_BUTTON_BG_COLOR_LABEL" showon="mod_type:popup[AND]button_type:1,2,3" />
+                <field name="fg_button" type="color" default=""
+                    	label="MOD_CALLBACK_BUTTON_FG_COLOR_LABEL" showon="mod_type:popup[AND]button_type:1,2,3" />
+                        
+                <field name="bd_hover_button" type="color" default=""
+                    	label="MOD_CALLBACK_BUTTON_BD_COLOR_HOVER_LABEL" showon="mod_type:popup[AND]button_type:1,2,3" />
+                <field name="bg_hover_button" type="color" default=""
+                    	label="MOD_CALLBACK_BUTTON_BG_COLOR_HOVER_LABEL" showon="mod_type:popup[AND]button_type:1,2,3" />
+                <field name="fg_hover_button" type="color" default=""
+                    	label="MOD_CALLBACK_BUTTON_FG_COLOR_HOVER_LABEL" showon="mod_type:popup[AND]button_type:1,2,3" />
+                
+                <field name="call_back0" hr="true" type="spacer"/>
+                
+				<field name="title" type="text" default="Обратный звонок" label="MOD_CALLBACK_TITLE_LABEL" showon="mod_type:popup" />
+                <field name="show_title" class="btn-group btn-group-yesno" type="radio" default="1" label="MOD_CALLBACK_SHOW_TITLE_LABEL" showon="mod_type:popup">
+					<option value="0">MOD_CALLBACK_NO</option>
+					<option value="1">MOD_CALLBACK_YES</option>
+				</field>
+                <field name="show_captcha" class="btn-group btn-group-yesno" type="radio" default="1" label="MOD_CALLBACK_SHOW_CAPTCHA_LABEL" description="MOD_CALLBACK_SHOW_CAPTCHA_DESC">
+					<option value="0">MOD_CALLBACK_NO</option>
+					<option value="1">MOD_CALLBACK_YES</option>
+				</field>
+				<field name="type_captcha" type="list" default="0" label="MOD_CALLBACK_TYPE_CAPTCHA_LABEL">
+					<option value="0">MOD_CALLBACK_TYPE_CAPTCHA_DEFAULT</option>
+					<option value="1">MOD_CALLBACK_TYPE_CAPTCHA_SLIDE</option>
+					<option value="2">MOD_CALLBACK_TYPE_CAPTCHA_JOOMLA</option>
+				</field>
+                <field name="form_sfc_class" type="text" default="" label="MOD_CALLBACK_FORM_SFC_CLASS_LABEL" />
+				
+                <field name="call_back1" hr="true" type="spacer" />
+                			
+				<field
+                    name="send_mail_type"
+                    type="radio" class="btn-group"
+                    label="MOD_CALLBACK_SEND_MAIL_TYPE_LABEL"
+                    description="MOD_CALLBACK_SEND_MAIL_TYPE_DESC"
+                    default="1"
+                >
+                    <option value="1">MOD_CALLBACK_SEND_MAIL_TYPE_MAIL_SITE</option>
+					<option value="2">MOD_CALLBACK_SEND_MAIL_TYPE_USERS</option>
+				</field>
+				<field name="send_mail" type="text" default="" label="MOD_CALLBACK_SEND_MAIL_LABEL" description="MOD_CALLBACK_SEND_MAIL_DESC" showon="send_mail_type:2" />
+				<field name="subject_email" type="text" size="50" default="Тема письма" label="MOD_CALLBACK_SUBJECT_LABEL" description="MOD_CALLBACK_SUBJECT_DESC" />
+				<field name="text_success" type="text" default="Ваш запрос успешно отправлен. Мы перезвоним Вам в ближайшее время" size="50" label="MOD_CALLBACK_TEXT_SUCCESS" />									
+				<field name="license_module" type="text" default="" size="50" label="MOD_CALLBACK_LICENSE_TITLE1" description="MOD_CALLBACK_LICENSE_DESC1" />
+				<field name="linkbuy" type="linkbuy" label="MOD_CALLBACK_LINK_BUY_TITLE" />
+			</fieldset>
+            
+			<fieldset name="fields" label="MOD_CALLBACK_FIELDS_LABEL" description="MOD_CALLBACK_FIELDS_DESC">
+				<field name="fields" type="callbackfields" label="MOD_CALLBACK_FIELDS_INPUT_LABEL" description="MOD_CALLBACK_FIELDS_INPUT_DESC" />
+			</fieldset>
+
+			<fieldset name="animation" label="MOD_CALLBACK_ANIMATION_LABEL" description="MOD_CALLBACK_ANIMATION_DESC">
+                
+                <field name="show_open" class="btn-group btn-group-yesno" type="radio" default="1" label="MOD_CALLBACK_SHOW_OPEN_LABEL" description="MOD_CALLBACK_SHOW_OPEN_DESC">
+					<option value="1">MOD_CALLBACK_SHOW_OPEN_JQUERY</option>
+					<option value="2">MOD_CALLBACK_SHOW_OPEN_FANCYBOX2</option>
+					<option value="3">MOD_CALLBACK_SHOW_OPEN_FANCYBOX3</option>
+				</field>
+                
+                <field name="call_back2" hr="true" type="spacer" />
+                
+                
+                
+                
+				<field name="show_fade" class="btn-group btn-group-yesno" type="radio" default="1" label="MOD_CALLBACK_SHOW_FADE_LABEL" showon="show_open:1">
+					<option value="0">MOD_CALLBACK_NO</option>
+					<option value="1">MOD_CALLBACK_YES</option>
+				</field>				
+				<field name="animation_speed" type="text" default="500" label="MOD_CALLBACK_ANIMATION_SPEED_LABEL" description="MOD_CALLBACK_ANIMATION_SPEED_DESC" showon="show_open:1" />
+				
+				<field name="show_animation" type="list" default="jQ" label="MOD_CALLBACK_SHOW_ANIMATION_LABEL" description="MOD_CALLBACK_SHOW_ANIMATION_DESC" showon="show_open:1">
+					<option value="jQ">MOD_CALLBACK_SHOW_ANIMATION_JQ</option>
+					<option value="fadeIn">MOD_CALLBACK_SHOW_ANIMATION_FADE</option>
+					<option value="fadeInDown">MOD_CALLBACK_SHOW_ANIMATION_FADEDOWN</option>
+					<option value="fadeInDownBig">MOD_CALLBACK_SHOW_ANIMATION_FADEDOWNBIG</option>
+					<option value="fadeInLeft">MOD_CALLBACK_SHOW_ANIMATION_FADELEFT</option>
+					<option value="fadeInLeftBig">MOD_CALLBACK_SHOW_ANIMATION_FADELEFTBIG</option>
+					<option value="fadeInRight">MOD_CALLBACK_SHOW_ANIMATION_FADEERIGHT</option>
+					<option value="fadeInRightBig">MOD_CALLBACK_SHOW_ANIMATION_FADERIGHTBIG</option>
+					<option value="fadeInUp">MOD_CALLBACK_SHOW_ANIMATION_FADEUP</option>
+					<option value="fadeInUpBig">MOD_CALLBACK_SHOW_ANIMATION_FADEUPBIG</option>
+					<option value="flipInX">MOD_CALLBACK_SHOW_ANIMATION_FLIPX</option>
+					<option value="flipInY">MOD_CALLBACK_SHOW_ANIMATION_FLIPY</option>
+					<option value="lightSpeedIn">MOD_CALLBACK_SHOW_ANIMATION_LIGHTSPEED</option>
+					<option value="rotateIn">MOD_CALLBACK_SHOW_ANIMATION_ROTATE</option>
+					<option value="rotateInDownLeft">MOD_CALLBACK_SHOW_ANIMATION_ROTATEDOWNLEFT</option>
+					<option value="rotateInDownRight">MOD_CALLBACK_SHOW_ANIMATION_ROTATEDOWNRIGHT</option>
+					<option value="rotateInUpLeft">MOD_CALLBACK_SHOW_ANIMATION_ROTATEUPLEFT</option>
+					<option value="rotateInUpRight">MOD_CALLBACK_SHOW_ANIMATION_ROTATEUPRIGHT</option>
+					<option value="rollIn">MOD_CALLBACK_SHOW_ANIMATION_ROLL</option>
+					<option value="zoomIn">MOD_CALLBACK_SHOW_ANIMATION_ZOOM</option>
+					<option value="zoomInDown">MOD_CALLBACK_SHOW_ANIMATION_ZOOMDOUN</option>
+					<option value="zoomInLeft">MOD_CALLBACK_SHOW_ANIMATION_ZOOMLEFT</option>
+					<option value="zoomInRight">MOD_CALLBACK_SHOW_ANIMATION_ZOOMRIGHT</option>
+					<option value="zoomInUp">MOD_CALLBACK_SHOW_ANIMATION_ZOOMUP</option>	
+					<option value="slideInDown">MOD_CALLBACK_SHOW_ANIMATION_SLIDEDOWN</option>	
+					<option value="slideInLeft">MOD_CALLBACK_SHOW_ANIMATION_SLIDELEFT</option>	
+					<option value="slideInRight">MOD_CALLBACK_SHOW_ANIMATION_SLIDERIGHT</option>	
+					<option value="slideInUp">MOD_CALLBACK_SHOW_ANIMATION_SLIDEUP</option>															
+				</field>
+                
+                <field name="call_back3" hr="true" type="spacer" />
+                
+				<field name="show_auto" class="btn-group btn-group-yesno" type="radio" default="0" label="MOD_CALLBACK_SHOW_AUTO_LABEL" description="MOD_CALLBACK_SHOW_AUTO_DESC">
+					<option value="0">MOD_CALLBACK_NO</option>
+					<option value="1">MOD_CALLBACK_YES</option>
+				</field>
+				<field name="show_delay" type="text" default="30" label="MOD_CALLBACK_SHOW_DELAY_LABEL" description="MOD_CALLBACK_SHOW_DELAY_DESC" />
+				<field name="show_limit" type="text" default="10" label="MOD_CALLBACK_SHOW_LIMIT_LABEL" description="MOD_CALLBACK_SHOW_LIMIT_DESC" />	
+
+			</fieldset>
+			<fieldset name="sms" label="MOD_CALLBACK_SMS_LABEL">
+				<field name="sms_status" class="btn-group btn-group-yesno" type="radio" default="0" label="MOD_CALLBACK_SMS_STATUS_LABEL">
+					<option value="0">MOD_CALLBACK_NO</option>
+					<option value="1">MOD_CALLBACK_YES</option>
+				</field>				
+				<field name="sms_login" type="text" label="MOD_CALLBACK_SMS_LOGIN_LABEL" />
+				<field name="sms_phones" type="text" label="MOD_CALLBACK_SMS_PHONE_LABEL" description="MOD_CALLBACK_SMS_PHONE_DESC" />
+			</fieldset>	
+            <fieldset name="advanced">
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+					rows="3"
+				/>
+
+				<field
+					name="cache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC"
+					default="1"
+					>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="text"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC"
+					default="900"
+				/>
+
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static"
+					>
+					<option value="static"></option>
+				</field>
+			</fieldset>		
+		</fields>
+	</config>
+</extension>
